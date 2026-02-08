@@ -1,4 +1,4 @@
-= Docker-compose.yaml Dokumentation
+= Docker-compose.yaml Dokumentation/Fragen
 ifndef::imagesdir[:imagesdir: images]
 
 Docker compose ist ein Werkzeug, mit dem mehrere Container gemeinsam gestartet und verwaltet werden können.
@@ -37,6 +37,55 @@ Die Docker-compose.yaml Datei besteht aus 3 Containern:
 - Environment: Es werden Umgebungsvariablen für die pgAdmin-Konfiguration gesetzt darunter PGADMIN_DEFAULT_EMAIL und PGADMIN_DEFAULT_PASSWORD.
 - Volume: Dieses Volume verbindet einen Ordner vom Computer (./data/pgadmin) mit dem pgAdmin-Container, sodass Einstellungen und Verbindungen gespeichert bleiben.
 - Ports: Der Container läuft auf dem Host 80 und kann unter localhost:8090 erreicht werden
+
+== Fragen (2.7)
+
+[%collapsible]
+.Wie kann die backend-Anwendung im docker-compose-service backend enthalten sein, wenn doch gar kein eigenes docker-image erstellt wird?
+====
+Die Backend-Anwendung wird nicht im Docker-Image gespeichert, sondern beim Start über ein Volume in den Container eingebunden und dort ausgeführt. Das Image vom Container selber ist nur Java.
+====
+
+[%collapsible]
+.Wie werden die Dienste der docker-compose.yaml gestartet und gestoppt?
+====
+gestartet: docker compose up (-d)  
+gestoppt: docker compose down
+====
+
+[%collapsible]
+.Wie können Sie die Logs der einzelnen Container einsehen, wenn die Services im Hintergrund laufen?
+====
+docker compose logs
+====
+
+[%collapsible]
+.Warum ist eine .env-Datei vorhanden?
+====
+i. sie ist nicht nötig. Bei z.B POSTGRES_DB: ${POSTGRES_DB:-db} ist 'db' der default wert, falls es in der env datei keinen eintrag gibt namens 'POSTGRES_DB' bzw. die env datei gar nicht existiert
+====
+
+[%collapsible]
+.Ist diese überhaupt notwendig?
+====
+ii. Nein, da die Datei auch Daten enthalten kann, die nichts im Repo zu suchen haben, wie z.b Passwörter.
+====
+
+[%collapsible]
+.Ist diese überhaupt notwendig?
+====
+ii. Nein, da die Datei auch Daten enthalten kann, die nichts im Repo zu suchen haben, wie z.b Passwörter.
+====
+
+[%collapsible]
+.Was bringt swagger?
+====
+Swagger zeigt alle REST-API-Endpunkte übersichtlich an und erlaubt, sie direkt im Browser zu testen.
+====
+
+
+
+
 
 
 
