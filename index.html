@@ -617,18 +617,18 @@ gestoppt: docker compose down</p>
 </div>
 </details>
 <details>
-<summary class="title">Ist diese überhaupt notwendig?</summary>
-<div class="content">
-<div class="paragraph">
-<p>ii. Nein, da die Datei auch Daten enthalten kann, die nichts im Repo zu suchen haben, wie z.b Passwörter.</p>
-</div>
-</div>
-</details>
-<details>
 <summary class="title">Was bringt swagger?</summary>
 <div class="content">
 <div class="paragraph">
 <p>Swagger zeigt alle REST-API-Endpunkte übersichtlich an und erlaubt, sie direkt im Browser zu testen.</p>
+</div>
+</div>
+</details>
+<details>
+<summary class="title">Muss der Port 5432 offen sein? Begründen Sie Ihre Antwort.</summary>
+<div class="content">
+<div class="paragraph">
+<p>Nein, da das Backend über das interne Docker-Netzwerk auf die Datenbank zugreift und diese über den Servicenamen „db“ und den Port 5432 erreicht.</p>
 </div>
 </div>
 </details>
@@ -637,7 +637,7 @@ gestoppt: docker compose down</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-02-08 17:56:38 UTC
+Last updated 2026-02-08 18:00:06 UTC
 </div>
 </div>
 </body>
