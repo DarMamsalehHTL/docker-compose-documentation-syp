@@ -1,4 +1,51 @@
-= Index page
+= Docker-compose.yaml Dokumentation
 ifndef::imagesdir[:imagesdir: images]
 
-image::img.png[]
+Docker compose ist ein Werkzeug, mit dem mehrere Container gemeinsam gestartet und verwaltet werden können.
+
+== GesamtStruktur
+
+Die Docker-compose.yaml Datei besteht aus 3 Containern:
+
+* backend
+* db
+* pgadmin
+
+== Backend
+
+- Image: Das Backend verwendet alpine und wird von einem vorgefertigten Image aus dem Docker Hub bereitgestellt.
+- Container Name: Der Container wird als quarkus-backend benannt.
+- Working Directory: Der Container wird im Verzeichnis /opt gestartet.
+- Volume: Dieses Volume verbindet einen Ordner vom Computer (./data/backend) mit dem Backend-Container (/opt/app), sodass Änderungen nicht verloren gehen.
+- Ports: Der Container läuft auf dem Host 8080 und kann unter localhost:8080 erreicht werden.
+- Environment Variables: Es werden Umgebungsvariablen im Container für die Datenbankverbindung gesetzt, darunter DB_HOST, POSTGRES_DB, POSTGRES_USER und POSTGRES_PASSWORD.
+- Depends On: Der Backend-Container hängt von der Datenbank ab, was bedeutet, dass die Datenbank zuerst gestartet wird.
+
+== DB
+
+- Image: Die Datenbank verwendet das offizielle PostgreSQL-Image (version: 18).
+- Container Name: Der Container wird als postgres-db benannt.
+- Environment: Diese Einstellungen geben an, wie sich der Container mit der Datenbank verbindet (Datenbankname, Benutzer, Passwort).
+- Volume: Dieses Volume verbindet einen Ordner vom Computer (./data/postgres) mit dem Datenbank-Container, sodass die Daten der Datenbank nicht verloren gehen.
+- Ports: Der Container läuft auf dem Host 5432 und kann unter localhost:5432 erreicht werden.
+- healthcheck: Es wird ein Healthcheck definiert, um die Verfügbarkeit der Datenbank zu überprüfen.
+
+== pgAdmin
+
+- Image: pgAdmin ist ein grafisches Verwaltungstool für PostgreSQL und wird von einem vorgefertigten Image aus dem Docker Hub bereitgestellt.
+- Container Name: Der Container wird als pgadmin benannt.
+- Environment: Es werden Umgebungsvariablen für die pgAdmin-Konfiguration gesetzt darunter PGADMIN_DEFAULT_EMAIL und PGADMIN_DEFAULT_PASSWORD.
+- Volume: Dieses Volume verbindet einen Ordner vom Computer (./data/pgadmin) mit dem pgAdmin-Container, sodass Einstellungen und Verbindungen gespeichert bleiben.
+- Ports: Der Container läuft auf dem Host 80 und kann unter localhost:8090 erreicht werden
+
+
+
+
+
+
+
+
+
+
+
+
