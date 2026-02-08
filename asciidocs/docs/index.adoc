@@ -72,15 +72,15 @@ ii. Nein, da die Datei auch Daten enthalten kann, die nichts im Repo zu suchen h
 ====
 
 [%collapsible]
-.Ist diese überhaupt notwendig?
-====
-ii. Nein, da die Datei auch Daten enthalten kann, die nichts im Repo zu suchen haben, wie z.b Passwörter.
-====
-
-[%collapsible]
 .Was bringt swagger?
 ====
 Swagger zeigt alle REST-API-Endpunkte übersichtlich an und erlaubt, sie direkt im Browser zu testen.
+====
+
+[%collapsible]
+.Muss der Port 5432 offen sein? Begründen Sie Ihre Antwort.
+====
+Nein, da das Backend über das interne Docker-Netzwerk auf die Datenbank zugreift und diese über den Servicenamen „db“ und den Port 5432 erreicht.
 ====
 
 
