@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
 <link rel="icon" type="image/png" href="themes/favicon.png">
-<title>Index page</title>
+<title>Docker-compose.yaml Dokumentation</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -444,20 +444,133 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
     }
 </style>
 </head>
-<body class="article">
+<body class="article toc2 toc-left">
 <div id="header">
-<h1>Index page</h1>
+<h1>Docker-compose.yaml Dokumentation</h1>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_gesamtstruktur">1. GesamtStruktur</a></li>
+<li><a href="#_backend">2. Backend</a></li>
+<li><a href="#_db">3. DB</a></li>
+<li><a href="#_pgadmin">4. pgAdmin</a></li>
+</ul>
+</div>
 </div>
 <div id="content">
-<div class="imageblock">
-<div class="content">
-<img src="images/img.png" alt="img">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Docker compose ist ein Werkzeug, mit dem mehrere Container gemeinsam gestartet und verwaltet werden können.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_gesamtstruktur"><a class="anchor" href="#_gesamtstruktur"></a>1. GesamtStruktur</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Die Docker-compose.yaml Datei besteht aus 3 Containern:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>backend</p>
+</li>
+<li>
+<p>db</p>
+</li>
+<li>
+<p>pgadmin</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_backend"><a class="anchor" href="#_backend"></a>2. Backend</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Image: Das Backend verwendet alpine und wird von einem vorgefertigten Image aus dem Docker Hub bereitgestellt.</p>
+</li>
+<li>
+<p>Container Name: Der Container wird als quarkus-backend benannt.</p>
+</li>
+<li>
+<p>Working Directory: Der Container wird im Verzeichnis /opt gestartet.</p>
+</li>
+<li>
+<p>Volume: Dieses Volume verbindet einen Ordner vom Computer (./data/backend) mit dem Backend-Container (/opt/app), sodass Änderungen nicht verloren gehen.</p>
+</li>
+<li>
+<p>Ports: Der Container läuft auf dem Host 8080 und kann unter localhost:8080 erreicht werden.</p>
+</li>
+<li>
+<p>Environment Variables: Es werden Umgebungsvariablen im Container für die Datenbankverbindung gesetzt, darunter DB_HOST, POSTGRES_DB, POSTGRES_USER und POSTGRES_PASSWORD.</p>
+</li>
+<li>
+<p>Depends On: Der Backend-Container hängt von der Datenbank ab, was bedeutet, dass die Datenbank zuerst gestartet wird.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_db"><a class="anchor" href="#_db"></a>3. DB</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Image: Die Datenbank verwendet das offizielle PostgreSQL-Image (version: 18).</p>
+</li>
+<li>
+<p>Container Name: Der Container wird als postgres-db benannt.</p>
+</li>
+<li>
+<p>Environment: Diese Einstellungen geben an, wie sich der Container mit der Datenbank verbindet (Datenbankname, Benutzer, Passwort).</p>
+</li>
+<li>
+<p>Volume: Dieses Volume verbindet einen Ordner vom Computer (./data/postgres) mit dem Datenbank-Container, sodass die Daten der Datenbank nicht verloren gehen.</p>
+</li>
+<li>
+<p>Ports: Der Container läuft auf dem Host 5432 und kann unter localhost:5432 erreicht werden.</p>
+</li>
+<li>
+<p>healthcheck: Es wird ein Healthcheck definiert, um die Verfügbarkeit der Datenbank zu überprüfen.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pgadmin"><a class="anchor" href="#_pgadmin"></a>4. pgAdmin</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Image: pgAdmin ist ein grafisches Verwaltungstool für PostgreSQL und wird von einem vorgefertigten Image aus dem Docker Hub bereitgestellt.</p>
+</li>
+<li>
+<p>Container Name: Der Container wird als pgadmin benannt.</p>
+</li>
+<li>
+<p>Environment: Es werden Umgebungsvariablen für die pgAdmin-Konfiguration gesetzt darunter PGADMIN_DEFAULT_EMAIL und PGADMIN_DEFAULT_PASSWORD.</p>
+</li>
+<li>
+<p>Volume: Dieses Volume verbindet einen Ordner vom Computer (./data/pgadmin) mit dem pgAdmin-Container, sodass Einstellungen und Verbindungen gespeichert bleiben.</p>
+</li>
+<li>
+<p>Ports: Der Container läuft auf dem Host 80 und kann unter localhost:8090 erreicht werden</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-02-08 15:44:17 UTC
+Last updated 2026-02-08 15:46:36 UTC
 </div>
 </div>
 </body>
